@@ -1,0 +1,8 @@
+<template>
+    <lightning-input type="search" label="Search Accounts" value={selectedAccountName} onchange={handleSearchTermChange} class="search-input"></lightning-input>
+    <ul if:true={accounts} class="slds-list_vertical slds-has-dividers_around-space">
+        <template for:each={accounts} for:item="account">
+            <li key={account.Id} class="" onclick={handleAccountSelection} data-id={account.Id}>{account.Name}</li>
+        </template>
+    </ul>
+</template>

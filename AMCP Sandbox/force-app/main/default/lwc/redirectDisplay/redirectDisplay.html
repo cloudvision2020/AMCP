@@ -1,0 +1,22 @@
+<!-- Redirect Display -->
+<template>
+  <template if:true={hasRedirects}>
+    <div>
+      Thank you for purchasing a course. Click on one of the button below to be redirected to the course in Ethos.
+    </div>
+    <template for:each={redirects} for:item="redirect">
+      <div class="slds-p-around_medium" key={redirect.ethosId}>
+        <c-redirect item={redirect}></c-redirect>
+      </div>
+    </template>
+    <div>
+      <lightning-button
+        label="Go to receipt page"
+        variant="brand"
+        title="Go to receipt page"
+        onclick={handleClose}
+      ></lightning-button>
+    </div>
+  </template>
+
+</template>

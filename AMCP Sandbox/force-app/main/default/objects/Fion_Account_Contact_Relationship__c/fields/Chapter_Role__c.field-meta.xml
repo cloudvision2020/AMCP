@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chapter_Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Chapter Role</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Chapter President</fullName>
+                <default>false</default>
+                <label>Chapter President</label>
+            </value>
+            <value>
+                <fullName>Chapter President-Elect</fullName>
+                <default>false</default>
+                <label>Chapter President-Elect</label>
+            </value>
+            <value>
+                <fullName>Chapter Vice President</fullName>
+                <default>false</default>
+                <label>Chapter Vice President</label>
+            </value>
+            <value>
+                <fullName>Chapter Treasurer</fullName>
+                <default>false</default>
+                <label>Chapter Treasurer</label>
+            </value>
+            <value>
+                <fullName>Chapter Secretary</fullName>
+                <default>false</default>
+                <label>Chapter Secretary</label>
+            </value>
+            <value>
+                <fullName>Chapter Membership Coordinator</fullName>
+                <default>false</default>
+                <label>Chapter Membership Coordinator</label>
+            </value>
+            <value>
+                <fullName>Chapter Faculty Advisor 1</fullName>
+                <default>false</default>
+                <label>Chapter Faculty Advisor 1</label>
+            </value>
+            <value>
+                <fullName>Chapter Faculty Advisor 2</fullName>
+                <default>false</default>
+                <label>Chapter Faculty Advisor 2</label>
+            </value>
+            <value>
+                <fullName>Diplomat</fullName>
+                <default>false</default>
+                <label>Diplomat</label>
+            </value>
+            <value>
+                <fullName>Co-Diplomat</fullName>
+                <default>false</default>
+                <label>Co-Diplomat</label>
+            </value>
+            <value>
+                <fullName>Dean</fullName>
+                <default>false</default>
+                <label>Dean</label>
+            </value>
+            <value>
+                <fullName>PT Coordinator</fullName>
+                <default>false</default>
+                <label>PT Coordinator</label>
+            </value>
+            <value>
+                <fullName>School Contact</fullName>
+                <default>false</default>
+                <label>School Contact</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

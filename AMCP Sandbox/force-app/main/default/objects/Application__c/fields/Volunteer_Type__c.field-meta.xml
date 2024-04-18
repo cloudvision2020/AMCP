@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volunteer_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Volunteer Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>JMCP Peer Reviewer</fullName>
+                <default>false</default>
+                <label>JMCP Peer Reviewer</label>
+            </value>
+            <value>
+                <fullName>JMCP Poster Reviewer</fullName>
+                <default>false</default>
+                <label>JMCP Poster Reviewer</label>
+            </value>
+            <value>
+                <fullName>Conference Buddy - Mentor</fullName>
+                <default>false</default>
+                <label>Conference Buddy - Mentor</label>
+            </value>
+            <value>
+                <fullName>Conference Buddy - Mentee</fullName>
+                <default>false</default>
+                <label>Conference Buddy - Mentee</label>
+            </value>
+            <value>
+                <fullName>AMCP Concierge Volunteer</fullName>
+                <default>false</default>
+                <label>AMCP Concierge Volunteer</label>
+            </value>
+            <value>
+                <fullName>Meeting greeters</fullName>
+                <default>false</default>
+                <label>Meeting greeters</label>
+            </value>
+            <value>
+                <fullName>JMCP author</fullName>
+                <default>false</default>
+                <label>JMCP author</label>
+            </value>
+            <value>
+                <fullName>District Days</fullName>
+                <default>false</default>
+                <label>District Days</label>
+            </value>
+            <value>
+                <fullName>Lobby Days</fullName>
+                <default>false</default>
+                <label>Lobby Days</label>
+            </value>
+            <value>
+                <fullName>Mock Interview Program - Mentor</fullName>
+                <default>false</default>
+                <label>Mock Interview Program - Mentor</label>
+            </value>
+            <value>
+                <fullName>Mock Interview Program - Mentee</fullName>
+                <default>false</default>
+                <label>Mock Interview Program - Mentee</label>
+            </value>
+            <value>
+                <fullName>Meeting Speaker</fullName>
+                <default>false</default>
+                <label>Meeting Speaker</label>
+            </value>
+            <value>
+                <fullName>Webinar Speaker</fullName>
+                <default>false</default>
+                <label>Webinar Speaker</label>
+            </value>
+            <value>
+                <fullName>Committee</fullName>
+                <default>false</default>
+                <label>Committee</label>
+            </value>
+            <value>
+                <fullName>Moderator</fullName>
+                <default>false</default>
+                <label>Moderator</label>
+            </value>
+            <value>
+                <fullName>Participant</fullName>
+                <default>false</default>
+                <label>Participant</label>
+            </value>
+            <value>
+                <fullName>Foundation P&amp;T Competition Judges</fullName>
+                <default>false</default>
+                <label>Foundation P&amp;T Competition Judges</label>
+            </value>
+            <value>
+                <fullName>Foundation Intern Application Reviewer</fullName>
+                <default>false</default>
+                <label>Foundation Intern Application Reviewer</label>
+            </value>
+            <value>
+                <fullName>Foundation Intern Virtual Mentor</fullName>
+                <default>false</default>
+                <label>Foundation Intern Virtual Mentor</label>
+            </value>
+            <value>
+                <fullName>Foundation Best Poster Competition Judge and Poster Mentor</fullName>
+                <default>false</default>
+                <label>Foundation Best Poster Competition Judge and Poster Mentor</label>
+            </value>
+            <value>
+                <fullName>Foundation Best Poster Competition Judge</fullName>
+                <default>false</default>
+                <label>Foundation Best Poster Competition Judge</label>
+            </value>
+            <value>
+                <fullName>Foundation Best Poster Mentor</fullName>
+                <default>false</default>
+                <label>Foundation Best Poster Mentor</label>
+            </value>
+            <value>
+                <fullName>Meeting Hospitality Host</fullName>
+                <default>false</default>
+                <label>Meeting Hospitality Host</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

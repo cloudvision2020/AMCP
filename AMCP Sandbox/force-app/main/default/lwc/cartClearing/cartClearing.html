@@ -1,0 +1,19 @@
+<!-- Cart Clearing -->
+<template>
+  <div>
+    Clearing your cart
+    <template if:true={isGuestUser}>
+      <lightning-button
+        data-name="continueButton"
+        label="Continue"
+        onclick={manualClose}
+      ></lightning-button>
+    </template>
+    <template if:false={isGuestUser}>
+            <lightning-spinner
+              alternative-text="Clearing cart"
+              size="large"
+            ></lightning-spinner>
+    </template>
+  </div>
+</template>
