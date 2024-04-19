@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from 'lwc';
-import searchAccounts from '@salesforce/apex/AccountController.searchAccounts';
+import searchAccounts from '@salesforce/apex/AccountController.getResults';
 
 export default class AccountSearch extends LightningElement {
     @track searchTerm = '';

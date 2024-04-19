@@ -1,8 +1,19 @@
 <template>
-    <lightning-input type="search" label="Search Accounts" value={selectedAccountName} onchange={handleSearchTermChange} class="search-input"></lightning-input>
-    <ul if:true={accounts} class="slds-list_vertical slds-has-dividers_around-space">
-        <template for:each={accounts} for:item="account">
-            <li key={account.Id} class="" onclick={handleAccountSelection} data-id={account.Id}>{account.Name}</li>
-        </template>
-    </ul>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1">
+            <lightning-input type="search" 
+                label="Search Accounts"
+                value={selectedAccountName} 
+                onchange={handleSearchTermChange} 
+                class="search-input">
+            </lightning-input>
+        </div>
+    <div class="slds-col slds-size_1-of-1">
+            <ul if:true={accounts} class="slds-list_vertical">
+                <template for:each={accounts} for:item="account">
+                    <li key={account.Id} onclick={handleAccountSelection} data-id={account.Id}>{account.Name}</li>
+                </template>
+            </ul>
+        </div>
+    </div>
 </template>

@@ -1,0 +1,26 @@
+:host {
+    display: block; 
+	margin-left: 100px;
+}
+
+.search-input {
+    width: 100%; 
+    max-width: 550px; 
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.slds-list_vertical {
+    padding: 0; 
+    margin: 0;
+    list-style-type: none;
+}
+
+.slds-list_vertical li {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.slds-list_vertical li:last-child {
+    border-bottom: none; 
+}
