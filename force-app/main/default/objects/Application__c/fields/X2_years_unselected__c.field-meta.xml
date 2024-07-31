@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2_years_unselected__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(DATEVALUE(CreatedDate) + 730 &gt; TODAY(), DATEVALUE(CreatedDate) &gt;= DATEVALUE(&quot;2025-12-31&quot;), Selected__c == false), true, false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>2 years unselected</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

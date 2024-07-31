@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AttributeKey__c</fullName>
+    <description>The key to which the custom fields values are added. This will be used on the service provider for looking up values</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The key to which the custom fields values are added. This will be used on the service provider for looking up values</inlineHelpText>
+    <label>AttributeKey</label>
+    <length>100</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

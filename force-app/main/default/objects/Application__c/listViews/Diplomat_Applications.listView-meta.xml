@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Diplomat_Applications</fullName>
+    <columns>NAME</columns>
+    <columns>First_Name__c</columns>
+    <columns>Last_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Application_Type__c</field>
+        <operation>equals</operation>
+        <value>Diplomat</value>
+    </filters>
+    <filters>
+        <field>Selected__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Diplomat Applications</label>
+</ListView>
