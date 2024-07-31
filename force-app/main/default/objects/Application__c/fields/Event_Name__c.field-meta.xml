@@ -3,7 +3,6 @@
     <fullName>Event_Name__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>lookup to the Event related to the Volunteer section of the Application.</description>
-    <externalId>false</externalId>
     <label>Event Name</label>
     <referenceTo>EventApi__Event__c</referenceTo>
     <relationshipName>Applications</relationshipName>

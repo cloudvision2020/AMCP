@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Awards_Name__c</fullName>
+    <label>Awards Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Advocate of the Year Award</fullName>
+                <default>false</default>
+                <label>Advocate of the Year Award</label>
+            </value>
+            <value>
+                <fullName>Diplomat of the Year Award</fullName>
+                <default>false</default>
+                <label>Diplomat of the Year Award</label>
+            </value>
+            <value>
+                <fullName>Distinguished Service Award</fullName>
+                <default>false</default>
+                <label>Distinguished Service Award</label>
+            </value>
+            <value>
+                <fullName>Experiential Education Preceptor Award</fullName>
+                <default>false</default>
+                <label>Experiential Education Preceptor Award</label>
+            </value>
+            <value>
+                <fullName>Fellow(FAMCP) Program</fullName>
+                <default>false</default>
+                <label>Fellow(FAMCP) Program</label>
+            </value>
+            <value>
+                <fullName>Individual Contribution Award</fullName>
+                <default>false</default>
+                <label>Individual Contribution Award</label>
+            </value>
+            <value>
+                <fullName>JMCP Award for Excellence</fullName>
+                <default>false</default>
+                <label>JMCP Award for Excellence</label>
+            </value>
+            <value>
+                <fullName>Managed Care Pharmacy Residency Director/Residency Preceptor Award</fullName>
+                <default>false</default>
+                <label>Managed Care Pharmacy Residency Director/Residency Preceptor Award</label>
+            </value>
+            <value>
+                <fullName>New Practitioner Award</fullName>
+                <default>false</default>
+                <label>New Practitioner Award</label>
+            </value>
+            <value>
+                <fullName>Spirit of Volunteerism Award</fullName>
+                <default>false</default>
+                <label>Spirit of Volunteerism Award</label>
+            </value>
+            <value>
+                <fullName>Steven G. Avey Award</fullName>
+                <default>false</default>
+                <label>Steven G. Avey Award</label>
+            </value>
+            <value>
+                <fullName>Best Resident/Fellow Poster</fullName>
+                <default>false</default>
+                <label>Best Resident/Fellow Poster</label>
+            </value>
+            <value>
+                <fullName>Chapter of the Year Award</fullName>
+                <default>false</default>
+                <label>Chapter of the Year Award</label>
+            </value>
+            <value>
+                <fullName>Best Student Poster</fullName>
+                <default>false</default>
+                <label>Best Student Poster</label>
+            </value>
+            <value>
+                <fullName>Best Graduate Student Poster</fullName>
+                <default>false</default>
+                <label>Best Graduate Student Poster</label>
+            </value>
+            <value>
+                <fullName>P&amp;T Competition Award</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>P&amp;T Competition Award</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Advocate of the Year Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Diplomat of the Year Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Distinguished Service Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Experiential Education Preceptor Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Fellow(FAMCP) Program</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Individual Contribution Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>JMCP Award for Excellence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Managed Care Pharmacy Residency Director/Residency Preceptor Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>New Practitioner Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Spirit of Volunteerism Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMCP Award</controllingFieldValue>
+            <valueName>Chapter of the Year Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Foundation Award</controllingFieldValue>
+            <valueName>Steven G. Avey Award</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Foundation Award</controllingFieldValue>
+            <valueName>Best Resident/Fellow Poster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Foundation Award</controllingFieldValue>
+            <valueName>Best Student Poster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Foundation Award</controllingFieldValue>
+            <valueName>Best Graduate Student Poster</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>ACC_Owner_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ACC Owner Id</shortDescription>
+        <value>0058c00000DZvku</value>
+    </labels>
+    <labels>
+        <fullName>Account_Created</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Created</shortDescription>
+        <value>Account Created</value>
+    </labels>
+    <labels>
+        <fullName>Account_Name_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account_Name_Validation</shortDescription>
+        <value>Account Creation Process</value>
+    </labels>
+    <labels>
+        <fullName>Base_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Base URL</shortDescription>
+        <value>https://amcp--amcpfull.sandbox.my.site.com/s/login??ReturnUrl=</value>
+    </labels>
+    <labels>
+        <fullName>Cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Company_Not_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company Not Found</shortDescription>
+        <value>If your Company is not found in the listing, plesae provide the Company name here</value>
+    </labels>
+    <labels>
+        <fullName>Company_not_provided</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company not provided</shortDescription>
+        <value>Company not provided</value>
+    </labels>
+    <labels>
+        <fullName>Create_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create Account</shortDescription>
+        <value>Create Account</value>
+    </labels>
+    <labels>
+        <fullName>Found_Contact_With_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Found_Contact_With_Email</shortDescription>
+        <value>Found_Contact_With_Email</value>
+    </labels>
+    <labels>
         <fullName>Item_Class_Name</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -8,10 +71,87 @@
         <value>Individual Corporate Memberships,Business Strategies Corporate Membership</value>
     </labels>
     <labels>
+        <fullName>New_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New_Record</shortDescription>
+        <value>New Record</value>
+    </labels>
+    <labels>
+        <fullName>No_Account_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No_Account_Found</shortDescription>
+        <value>No_Account_Found</value>
+    </labels>
+    <labels>
+        <fullName>No_Email_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No_Email_Found</shortDescription>
+        <value>No_Email_Found</value>
+    </labels>
+    <labels>
+        <fullName>No_Records_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No_Records_Found</shortDescription>
+        <value>Can’t find your organization?</value>
+    </labels>
+    <labels>
+        <fullName>Remove_selected_option</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Remove_selected_option</shortDescription>
+        <value>Remove_selected_option</value>
+    </labels>
+    <labels>
+        <fullName>Remove_selected_record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Remove_selected_record</shortDescription>
+        <value>Remove_selected_record</value>
+    </labels>
+    <labels>
         <fullName>SalesforceURL</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>SalesforceURL</shortDescription>
         <value>https://amcp.lightning.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Something_went_wrong</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Something_went_wrong</shortDescription>
+        <value>Something_went_wrong!</value>
+    </labels>
+    <labels>
+        <fullName>UserCreated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UserCreated</shortDescription>
+        <value>Duplicate Contact/User found. Try with different Email Address.</value>
+    </labels>
+    <labels>
+        <fullName>Username</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Username</shortDescription>
+        <value>ver123@tes.com</value>
+    </labels>
+    <labels>
+        <fullName>success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>success</shortDescription>
+        <value>success</value>
     </labels>
 </CustomLabels>

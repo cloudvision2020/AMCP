@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>New_Grad_Student_email_alert</name>
+        <label>New Grad Student email alert</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <actionName>OrderApi__Subscription__c.New_Grad_Student_88_days_past</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>OrderApi__Subscription__c.New_Grad_Student_88_days_past</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>Days_to_Lapse</name>
+        <label>Days to Lapse</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Not Expired</defaultConnectorLabel>
+        <rules>
+            <name>Is_Expiring</name>
+            <conditionLogic>1 AND 2 AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Days_To_Lapse__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>-90.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Contact_Records.AMCP_Membership_Type__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Student</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Contact_Records.Grad_equals_Current_Year__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>New_Grad_Student_email_alert</targetReference>
+            </connector>
+            <label>Is Expiring</label>
+        </rules>
+    </decisions>
+    <description>Membership Renewal 90 days past; Graduated Student</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Days in between expiration date and today</description>
+        <name>ExpirationDate</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.OrderApi__Paid_Through_Date__c} - TODAY()</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Student Membership Renewal: 90 Days Past - Grad Year 2023 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Student Membership Renewal: 90 Days Past - Grad Year 2023</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Contact_Records</name>
+        <label>Get Contact Records</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Days_to_Lapse</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.OrderApi__Contact__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Contact_Records</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>1 AND 2</filterLogic>
+        <filters>
+            <field>OrderApi__Enable_Auto_Renew__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>OrderApi__Days_To_Lapse__c</field>
+            <operator>LessThan</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </filters>
+        <object>OrderApi__Subscription__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>GetContacts</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+</Flow>

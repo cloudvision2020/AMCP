@@ -7,7 +7,7 @@ private class dlrs_ContactTest
     @IsTest
     private static void testTrigger()
     {
-        // Force the dlrs_EventApi_AttendeeTrigger to be invoked, fails the test if org config or other Apex code prevents this.
+        // Force the dlrs_Fion_Account_Contact_Relaa2mTrigger to be invoked, fails the test if org config or other Apex code prevents this.
         dlrs.RollupService.testHandler(new Contact());
     }
 }

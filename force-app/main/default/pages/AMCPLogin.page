@@ -1,0 +1,15 @@
+<apex:page title="{!$Label.joinapi__Login}"
+  showHeader="false"
+  standardStylesheets="false"
+  docType="html-5.0"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  controller="AMCPLoginController"
+  action="{!checkSession}"
+>
+  <apex:composition template="joinapi__template">
+    <apex:define name="jpTitle"> {!step.joinapi__Page_Title__c} </apex:define>
+    <apex:define name="jpStyles"> </apex:define>
+    <apex:define name="jpMain"> </apex:define>
+  </apex:composition>
+</apex:page>

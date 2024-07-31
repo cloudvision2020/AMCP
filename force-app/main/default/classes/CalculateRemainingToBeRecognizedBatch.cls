@@ -41,7 +41,7 @@ public class CalculateRemainingToBeRecognizedBatch implements Database.Batchable
             /*if(salesOrder.OrderApi__Credits_Applied__c != null && salesOrder.OrderApi__Credits_Applied__c != 0){
             	soAmount = soAmount - salesOrder.OrderApi__Credits_Applied__c;
             }*/
-                                                        
+            salesOrder.Remaining_to_be_Recognized__c = 0;                                  
             if(soAmount != 0 && (remainingXSalesOrderMap.get(salesOrder.Id) + soAmount) <= 0){
             	salesOrder.Remaining_to_be_Recognized__c = 0;
             } else if((remainingXSalesOrderMap.get(salesOrder.Id) + soAmount) > 0){

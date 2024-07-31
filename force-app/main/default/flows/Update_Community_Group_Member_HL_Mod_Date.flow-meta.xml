@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <description>Used For the Higher Logic Integration</description>
+    <environments>Default</environments>
+    <interviewLabel>Update Community Group Member HL Mod Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Community Group Member HL Mod Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update HL Mod Date if changes are made. Used for the Higher Logic Integration</description>
+        <name>Update_HL_Mod_Date</name>
+        <label>Update HL Mod Date</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>HL_Mod_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_HL_Mod_Date</targetReference>
+        </connector>
+        <filterFormula>ISNEW() ||
+ISCHANGED({!$Record.PagesApi__Contact__c}) ||
+ISCHANGED({!$Record.PagesApi__Community_Group__c}) ||
+ISCHANGED({!$Record.PagesApi__Role__c}) ||
+ISCHANGED({!$Record.PagesApi__Activated_Date__c}) ||
+ISCHANGED({!$Record.PagesApi__Deactivated_Date__c})</filterFormula>
+        <object>PagesApi__Community_Group_Member__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

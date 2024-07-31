@@ -1,0 +1,251 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-15-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={showLoadingSpinner}>
+        <div >
+            <lightning-spinner class="spins" size="large"></lightning-spinner>
+        </div>
+    </template>
+        <div>
+            <div class="container-fluid">
+                 <template if:true={isAccountCreate}>
+                    <div style="color:red;">
+                        {contentMsg}
+                    </div>
+                </template>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conFirstName" type="text" required="true" maxlength="255" label="First Name" value={newContact.FirstName}  message-when-value-missing="Please fill out First Name."></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conLastName" type="text" required="true" maxlength="255" label="Last Name" value={newContact.LastName} message-when-value-missing="Please fill out Last Name." ></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conEmailType"
+                        label="Email Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsEmailType}
+                        onchange={handleEmailTypeChange} 
+                        message-when-value-missing="Please fill out Email Type."></lightning-combobox>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conEmail" type="email" required="true" maxlength="100" label="Email" value={newContact.Email}  onchange={handleEmailChange} message-when-value-missing="Please fill out Email."></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <c-lwc-lookup lookup-label="Company" object-api-name="account" icon-name="standard:account"  
+                        onrecordselection={onCountySelection}  parent-id ={accountDistrictRecordId}  account-type="School"></c-lwc-lookup>
+                </div>
+                <div class="form-group slds-p-top_small" style="margin-top: 6px;">
+                    <b><lightning-input name="companyNotFound" type="checkbox" label="Company Not Found?" value={newContact.Company_Not_Found__c} ></lightning-input></b>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    If your company is not found in the listing, please check the box and provide the company name below.
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conCompanyName" type="text" maxlength="255" label="Company/School Of Pharmacy" value={newContact.Company_Organization_Name__c} ></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conPhoneType"
+                        label="Phone Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsPhoneType}
+                        onchange={handlePhoneDataTypeChange} 
+                        message-when-value-missing="Please fill out Phone Type."></lightning-combobox>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conWorkPhone" type="text" required="true" maxlength="20" label="Phone" value={newContact.OrderApi__Work_Phone__c} message-when-value-missing="Please fill out Cell Phone." ></lightning-input>
+                </div>
+                <div class="form-group">
+                    <lightning-input-address
+                        address-label="Address"
+                        name="Address"
+                        street-label="Street"
+                        city-label="City"
+                        country-label="Country"
+                        province-label="State"
+                        postal-code-label="Postal Code"
+                        street={newContact.OtherStreet}
+                        city={newContact.OtherCity}
+                        country={newContact.OtherCountry}
+                        province={newContact.OtherState}
+                        postal-code={newContact.OtherPostalCode}
+                        field-level-help="Enter Address" 
+                        country-options={controllingHomeValues}
+                        province-options={dependentHomeValues}
+                        onchange={onHomeControllerFieldChange} 
+                        required>
+                    </lightning-input-address>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conAddressType"
+                        label="Address Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsAddressType}
+                        onchange={handleAddressTypeChange} 
+                        message-when-value-missing="Please fill out Address Type."></lightning-combobox>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conJobTitle" type="text" required="true" maxlength="255" label="Job Title" value={newContact.Title} message-when-value-missing="Please fill out Job Title."></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conEmployerType"
+                        label="Employer Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsEmployerType}
+                        onchange={handleEmployerTypeChange} 
+                        message-when-value-missing="Please fill out Employer Type."></lightning-combobox>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conPrimaryPosition"
+                        label="Primary Position" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsPositions}
+                        onchange={handlePositionChange} 
+                        message-when-value-missing="Please fill out Primary Position."></lightning-combobox>
+                </div>
+                <!--<div class="form-group slds-p-top_small" style="margin-top: 6px;">
+                    <b><lightning-input name="companyNotFound" type="checkbox" label="Company Not Found?" value={newContact.Company_Not_Found__c} ></lightning-input></b>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    If your company is not found in the listing, please check the box and provide the company name below.
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conCompanyName" type="text" maxlength="255" label="Company/School Of Pharmacy" value={newContact.Company_Organization_Name__c} ></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conNickName" type="text" maxlength="255" label="Nickname" value={newContact.NickName} ></lightning-input>
+                </div>-->
+                <!--<div class="form-group slds-p-top_small">
+                    <lightning-combobox 
+                        name="conSalutation" 
+                        label="Suffix" 
+                        value={value} 
+                        placeholder="-- None --" 
+                        options={salutationOptions} 
+                        field-level-help="Select Salutation." 
+                        message-when-value-missing="Please fill out Salutation" 
+                        onchange={handleSalutationChange} ></lightning-combobox>                     
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conJobTitle" type="text" required="true" maxlength="255" label="Job Title" value={newContact.Title} message-when-value-missing="Please fill out Job Title."></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conEmployerType"
+                        label="Employer Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsEmployerType}
+                        onchange={handleEmployerTypeChange} 
+                        message-when-value-missing="Please fill out Employer Type."></lightning-combobox>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conPrimaryPosition"
+                        label="Primary Position" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsPositions}
+                        onchange={handlePositionChange} 
+                        message-when-value-missing="Please fill out Primary Position."></lightning-combobox>
+                </div>-->
+                <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conJobRole"
+                        label="Job Role" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsJobRole}
+                        onchange={handleJobRoleChange} 
+                        message-when-value-missing="Please fill out Job Role."></lightning-combobox>
+                </div>
+                <!--<div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conPhoneType"
+                        label="Phone Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsPhoneType}
+                        onchange={handlePhoneDataTypeChange} 
+                        message-when-value-missing="Please fill out Phone Type."></lightning-combobox>
+                </div>-->
+                <!--<div class="form-group slds-p-top_small">
+                    <lightning-input name="conWorkPhone" type="text" required="true" maxlength="20" label="Phone" value={newContact.OrderApi__Work_Phone__c} message-when-value-missing="Please fill out Cell Phone." ></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conMobilePhone" type="text" required="true" maxlength="20" label="Mobile" value={newContact.MobilePhone} message-when-value-missing="Please fill out Mobile Phone." ></lightning-input>
+                </div>-->
+               <!-- <div class="form-group slds-p-top_small">
+                    <lightning-combobox
+                        name="conAddressType"
+                        label="Address Type" 
+                        required="true" 
+                        value={value}
+                        placeholder="-- None --"
+                        options={optionsAddressType}
+                        onchange={handleAddressTypeChange} 
+                        message-when-value-missing="Please fill out Address Type."></lightning-combobox>
+                </div>-->
+               <!-- <div class="form-group">
+                    <lightning-input-address
+                        address-label="Address"
+                        name="Address"
+                        street-label="Street"
+                        city-label="City"
+                        country-label="Country"
+                        province-label="State"
+                        postal-code-label="Postal Code"
+                        street={newContact.OtherStreet}
+                        city={newContact.OtherCity}
+                        country={newContact.OtherCountry}
+                        province={newContact.OtherState}
+                        postal-code={newContact.OtherPostalCode}
+                        field-level-help="Help Text for inputAddress field" 
+                        country-options={controllingHomeValues}
+                        province-options={dependentHomeValues}
+                        onchange={onHomeControllerFieldChange} 
+                        required>
+                    </lightning-input-address>
+                </div>-->
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conUsername" type="email" required="true" label="Username" value={conUsername} message-when-value-missing="Please fill out Username." ></lightning-input>
+                </div>
+                <div class="form-group slds-p-top_small">
+                    <lightning-input name="conPassword" type="password" required="true" label="Password" value={conPassword} message-when-value-missing="Please fill out Password." ></lightning-input>
+                </div>
+            </div>   
+               <!--<div class="g-recaptcha" data-sitekey="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key" data-callback="recaptchaCallback"></div>-->
+                <!--<div class="recaptcha"></div>-->
+            <div id="recaptcha-container">
+                <div class="form-group slds-p-top_small" >
+                    <lightning-button variant="brand" label="Create Account" title="Neutral action" onclick={createAccount} style="width:100%;" class="createAccSubmitButton" ></lightning-button>
+                </div> 
+            </div> 
+        </div>
+
+   
+    
+</template>

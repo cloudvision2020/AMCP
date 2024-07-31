@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Create Soft Cedits {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Soft Cedits</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Soft_Credits</name>
+        <label>Create Soft Credits</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Receipt__r.OrderApi__Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Contact__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Sales_Order__r.OrderApi__Contact__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Matching_Amount_received__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Total__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <stringValue>Matching</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Soft_Credit__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Soft_Credits</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OrderApi__Item_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Matching Donation</stringValue>
+            </value>
+        </filters>
+        <object>OrderApi__Receipt_Line__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

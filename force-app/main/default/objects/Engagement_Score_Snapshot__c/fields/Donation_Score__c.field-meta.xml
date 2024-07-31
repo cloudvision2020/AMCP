@@ -3,9 +3,10 @@
     <fullName>Donation_Score__c</fullName>
     <externalId>false</externalId>
     <label>Donation Score</label>
-    <length>255</length>
+    <precision>18</precision>
     <required>false</required>
+    <scale>1</scale>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
+    <type>Number</type>
     <unique>false</unique>
 </CustomField>

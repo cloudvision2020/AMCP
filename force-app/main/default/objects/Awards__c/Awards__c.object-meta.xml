@@ -155,8 +155,8 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Award</label>
     <nameField>
-        <label>Awards Name</label>
-        <type>Text</type>
+        <label>Award</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Awards</pluralLabel>
     <searchLayouts></searchLayouts>

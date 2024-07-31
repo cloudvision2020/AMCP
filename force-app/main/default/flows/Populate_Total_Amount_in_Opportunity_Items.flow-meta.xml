@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <description>asynchronous run</description>
+    <environments>Default</environments>
+    <interviewLabel>Populate Total Amount in Opportunity Items {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Populate Total Amount in Opportunity Items</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Copy_1_of_Populate_Total_Amount</name>
+        <label>Copy 1 of Populate Total Amount</label>
+        <locationX>50</locationX>
+        <locationY>288</locationY>
+        <inputAssignments>
+            <field>Sale_Price__c</field>
+            <value>
+                <elementReference>$Record.List_Price__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Total_Amount_OI__c</field>
+            <value>
+                <elementReference>$Record.Sold_Price_Total_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Populate_Total_Amount</name>
+        <label>Populate Total Amount</label>
+        <locationX>314</locationX>
+        <locationY>288</locationY>
+        <inputAssignments>
+            <field>Sale_Price__c</field>
+            <value>
+                <elementReference>$Record.List_Price__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Total_Amount_OI__c</field>
+            <value>
+                <elementReference>$Record.Sold_Price_Total_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Copy_1_of_Populate_Total_Amount</targetReference>
+        </connector>
+        <object>Opportunity_Item__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Populate_Total_Amount</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

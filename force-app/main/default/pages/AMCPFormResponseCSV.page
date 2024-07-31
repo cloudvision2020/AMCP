@@ -1,0 +1,7 @@
+<apex:page title="AMCP: Form Responsce Export" sidebar="false" controller="GetFormResponseRecordsController" cache="false" standardStylesheets="false" showHeader="false" applyBodyTag="false" applyHtmlTag="false" contentType="application/octet-stream#{!$CurrentPage.Parameters.title}.csv" >
+<apex:variable value="" var="newline"/>
+<apex:repeat value="{!columns}" var="col" >{!col},</apex:repeat>
+<apex:repeat value="{!items}" var="a" >
+{!newline}<apex:repeat value="{!items[a]}" var="b" >"{!b}",</apex:repeat>
+</apex:repeat>
+</apex:page>

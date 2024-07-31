@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Qualities_and_or_experience__c</fullName>
     <description>What qualities and/or experience will you bring if selected? In addition, please list AMCP activities along with volunteer experiences you believe pertinent to the committee (s) you have selected.</description>
-    <externalId>false</externalId>
     <label>Qualities and/or Experience</label>
     <length>32768</length>
     <trackTrending>false</trackTrending>

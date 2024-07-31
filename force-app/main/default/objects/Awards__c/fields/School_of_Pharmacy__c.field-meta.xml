@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>School_of_Pharmacy__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <externalId>false</externalId>
     <label>School of Pharmacy</label>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Awards</relationshipLabel>

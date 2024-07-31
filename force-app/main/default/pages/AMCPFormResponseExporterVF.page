@@ -1,0 +1,90 @@
+<apex:page controller="GetAMCPFormResponseController" showHeader="true" standardStylesheets="true" sidebar="true" renderAs="html" doctype="html-5.0">
+    <apex:includeScript value="https://code.jquery.com/jquery-3.6.0.min.js"/>
+    <apex:includeScript value="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"/>
+    <apex:stylesheet value="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+	<apex:slds /> 
+    <script>
+    $(document).ready(function() {
+        $("#selectedList, #availableList").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
+        $("[id$='submitBtn']").click(function(e) {
+                var selectedIds = [];
+                $("#selectedList li").each(function() {
+                    selectedIds.push($(this).data('id'));
+                });
+            	console.log("SELECTED IDS",selectedIds);
+                $("[id$='selectedFields']").val(selectedIds.join(','));
+            submitForm();
+        });
+    });
+    </script>
+    <style>
+        .connectedSortable { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; width: 100%; min-height: 300px; border: 1px solid #eee; background: #fafafa; box-sizing: border-box !important;}
+        .connectedSortable li { margin: 5px; padding: 5px; font-size: 1.2em; width: calc(100%-10px) !important; box-sizing: border-box !important;}
+        body{
+        	font-size: 16px;
+        }
+		h1{
+         font-size: 28px !important;
+        font-weight: bold;
+        margin-bottom: 15px !important;
+        }
+        h3{
+        font-size: 18px !important;
+        font-weight: bold;
+        }
+    </style>
+
+    
+    <div style="margin: 20px; max-width: 1024px;">
+    <h1 style="">
+        Export Reponses : {!title}
+    </h1>
+    <apex:form id="form">
+        <apex:actionFunction name="submitForm" action="{!processSelection}" rerender="form" />
+
+        <div class="slds-grid slds-gutters" style="max-width: 800px; margin-bottom: 15px;">
+          <div class="slds-col">
+                <h3>Included Fields</h3>
+                <ul id="selectedList" class="connectedSortable" style="background: #9FCDA6;">
+                    <apex:repeat value="{!fields}" var="f">
+                        <li class="ui-widget-content" data-id="{!f.Id}">{!f.Name}</li>
+                    </apex:repeat>
+              	</ul>
+          </div>
+            
+          <div class="slds-col">
+                <h3>Excluded Fields</h3>
+                <ul id="availableList" class="connectedSortable">
+
+                </ul>
+          </div>
+        
+        </div>
+        
+        <!-- Add date input fields here -->
+        <div class="slds-grid slds-gutters" style="margin-bottom: 15px; max-width: 400px;">
+            <div class="slds-col">
+                <label for="startDate">Start Date:</label>
+                <apex:input type="date" id="startDate" value="{!startDate}" styleClass="slds-input"/>
+            </div>
+            <div class="slds-col">
+                <label for="endDate">End Date:</label>
+                <apex:input type="date" id="endDate" value="{!endDate}" styleClass="slds-input"/>
+            </div>
+        </div>
+
+        
+
+
+        <apex:inputHidden id="selectedFields" value="{!selectedFieldIds}" />
+
+        <input type="button" value="Export Responses" id="submitBtn" class="slds-button slds-button_brand"/>
+
+        <!-- <apex:commandButton value="Submit" action="{!processSelection}" reRender="form" id="submitBtn"/> -->
+    </apex:form>
+    </div>
+
+</apex:page>

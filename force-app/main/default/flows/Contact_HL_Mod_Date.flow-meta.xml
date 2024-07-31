@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <description>Corrected Formula in criteria with Dan&apos;s latest addition of fields (5/3)</description>
+    <environments>Default</environments>
+    <interviewLabel>Contact HL Mod Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contact HL Mod Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Updates the HL Mod Date field if changes are made. Used for the Higher Logic Integration.</description>
+        <name>HL_Mod_Date_Update</name>
+        <label>HL Mod Date Update</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>HL_Mod_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>HL_Mod_Date_Update</targetReference>
+        </connector>
+        <filterFormula>OR(
+ISNEW() ,
+ISCHANGED({!$Record.OrderApi__Preferred_Email__c}) ,
+ISCHANGED({!$Record.Designation__c}) ,
+ISCHANGED({!$Record.Salutation}) ,
+ISCHANGED({!$Record.Suffix}) ,
+ISCHANGED({!$Record.Title}),
+ISCHANGED({!$Record.MailingStreet}) ,
+ISCHANGED({!$Record.MailingCity}) ,
+ISCHANGED({!$Record.MailingState}) ,
+ISCHANGED({!$Record.MailingPostalCode}) ,
+ISCHANGED({!$Record.MailingCountry}),
+ISCHANGED({!$Record.OrderApi__Preferred_Phone__c}),
+ISCHANGED({!$Record.OrderApi__Work_Phone__c}),
+ISCHANGED({!$Record.MobilePhone}),
+ISCHANGED({!$Record.HomePhone}),
+ISCHANGED({!$Record.X1st_Area_of_Expertise_Interest__c}),
+ISCHANGED({!$Record.X2nd_Area_of_Expertise_Interest__c}),
+ISCHANGED({!$Record.X3rd_Area_of_Expertise_Interest__c}),
+ISCHANGED({!$Record.Employer_Type__c}),
+ISCHANGED({!$Record.Job_Role__c}),
+ISCHANGED({!$Record.Primary_Position__c}) ,
+ISCHANGED({!$Record.Gender__c}) ,
+ISCHANGED({!$Record.Graduation_Year__c}) ,
+ISCHANGED({!$Record.License__c}),
+ISCHANGED({!$Record.School_of_Pharmacy__c}),
+ISCHANGED({!$Record.Membership_Status__c}),
+ISCHANGED({!$Record.health_care_decision_maker__c}),
+ISCHANGED({!$Record.External_Import_ID__c}),
+ISCHANGED({!$Record.Informal_Name__c}),
+ISCHANGED({!$Record.FirstName}) ,
+ISCHANGED({!$Record.LastName}) ,
+ISCHANGED({!$Record.AccountId}))</filterFormula>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

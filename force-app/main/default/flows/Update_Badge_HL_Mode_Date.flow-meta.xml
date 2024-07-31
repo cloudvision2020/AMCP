@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <description>Used for the Higher Logic Integration</description>
+    <environments>Default</environments>
+    <interviewLabel>Update Badge HL Mode Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Badge HL Mode Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Updates the HL Mod Date field if changes are made. Used for the Higher Logic Integration.</description>
+        <name>Update_HL_Mod_Date</name>
+        <label>Update HL Mod Date</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>HL_Mod_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_HL_Mod_Date</targetReference>
+        </connector>
+        <filterFormula>ISNEW() ||
+ISCHANGED({!$Record.OrderApi__Awarded_Date__c}) ||
+ISCHANGED({!$Record.OrderApi__Expired_Date__c}) ||
+ISCHANGED({!$Record.OrderApi__Badge_Type__c}) ||
+ISCHANGED({!$Record.OrderApi__Contact__c})</filterFormula>
+        <object>OrderApi__Badge__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

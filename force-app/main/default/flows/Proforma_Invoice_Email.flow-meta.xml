@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Migrated from the: Proforma Invoice Email workflow rule
+Workflow rule description: &quot;</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Email_Sent_DateFormula</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <label>Proforma Invoice Email</label>
+    <migratedFromWorkflowRuleName>Proforma Invoice Email</migratedFromWorkflowRuleName>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>mainUpdate</name>
+        <label>mainUpdate</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>OrderApi__Is_Proforma__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>mainUpdate</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>AND( {!$Record.OrderApi__Auto_Send_Proforma_Invoice_Emails__c}, NOT( ISNULL( {!$Record.OrderApi__Preferred_Email__c} ) ) , ISPICKVAL( {!$Record.OrderApi__Posting_Entity__c} , &apos;Receipt&apos;),  {!$Record.OrderApi__Is_Closed__c} , NOT( {!$Record.OrderApi__Is_Posted__c} ), NOT( {!$Record.OrderApi__Is_Cancelled__c} ),             NOT( ISBLANK( {!$Record.OrderApi__Preferred_Email__c} ) )  )</filterFormula>
+        <object>OrderApi__Sales_Order__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

@@ -1,0 +1,152 @@
+<template>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="combobox-id-2">{lookupLabel}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                    aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                    <template if:true={selectedValue}>
+                        <div data-key="pilldiv"
+                            class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right"
+                            role="none">
+                            <span
+                                class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon"
+                                title="object">
+                                <div class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <lightning-icon icon-name={iconName} size="small"></lightning-icon>
+                                </div>
+                                <span class="slds-assistive-text">Record</span>
+                            </span>
+                            <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value"
+                                id="combobox-id-5" aria-controls="listbox-id-5" role="textbox"
+                                placeholder="Select an Option" readonly value={selectedValue} />
+                            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                onclick={removeRecordOnLookup} title={label.Remove_selected_option}>
+                                <span class="slds-button__icon" aria-hidden="true">
+                                    <lightning-icon icon-name="utility:close" size="xx-Small"
+                                        class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                        aria-hidden="true"></lightning-icon>
+                                </span>
+                                <span class="slds-assistive-text">{label.Remove_selected_record}</span>
+                            </button>
+                        </div>
+                    </template>
+
+                    <template if:false={selectedValue}>
+                        <div data-key="searchdiv"
+                            class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                            role="none">
+                            <input type="text" onfocusout={onLeave} value={searchKey} onkeyup={handleKeyChange}
+                                onchange={handleKeyChange} class="slds-input slds-combobox__input slds-has-focus"
+                                id="combobox-id-2" aria-autocomplete="list" aria-controls="listbox-id-2" role="textbox"
+                                placeholder="Search..." />
+                            <span
+                                class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                <lightning-icon icon-name="utility:search" size="xx-Small"
+                                    class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                    aria-hidden="true"></lightning-icon>
+                            </span>
+                        </div>
+
+                        <template if:true={recordsList}>
+                            <div id="listbox-id-2-venu" data-key="dropdownresult"
+                                class="slds-show slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template if:true={message}>
+                                        <center> {message}</center>
+                                    </template>
+                                    <template for:each={recordsList} for:item="record">
+                                        <li id={record.Id} key={record.Id} onclick={onRecordSelection}
+                                            role="presentation" class="slds-listbox__item">
+                                            <template if:false={checkLabel}>
+                                                <div data-key={record.Id} data-name={record.Name}
+                                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                    role="option">
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <span class="slds-icon_container">
+                                                            <lightning-icon icon-name={iconName} size="small">
+                                                            </lightning-icon>
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <span data-key={record.Id} data-name={record.School_District_Name__c}
+                                                            class="slds-listbox__option-text slds-listbox__option-text_entity">{record.Name}  
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                            <template if:true={checkLabel}>
+                                                <div data-key={record.Id} data-name={record.School_District_Name__c}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option">
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <span class="slds-icon_container">
+                                                            <lightning-icon icon-name={iconName} size="small">
+                                                            </lightning-icon>
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <template if:true={checkLabel}>
+                                                            <span data-key={record.Id} data-name={record.School_District_Name__c}
+                                                                class="slds-listbox__option-text slds-listbox__option-text_entity">{record.School_District_Name__c}  
+                                                            </span>
+                                                        </template>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </li>
+                                    </template>
+                                    <template if:true={isNew}>
+                                        <lightning-button variant="bare" label={label.New_Record} title={label.New_Record}
+                                            onclick={createNewRecord} icon-name="utility:add"
+                                            class="slds-p-around_xxx-small">
+                                        </lightning-button>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <template if:true={isNewRecord}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_x-small"
+                aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={createNewRecord}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                          </svg>
+                          <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create a New {objectApiName}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-p-left_large slds-p-right_large slds-p-bottom_small">
+                            <div class="container-fluid">
+                                <div class="form-group">
+                                    <lightning-input name="acntName" type="text" required="true" maxlength="255" label="Name" value={newAccount.Name}  message-when-value-missing={label.Account_Name_Validation}></lightning-input>
+                                </div>
+                                <div class="form-group">
+                                    <lightning-input name="acntPhone" type="text" maxlength="255" label="Phone" value={newAccount.Phone}></lightning-input>
+                                </div>
+                            </div>  
+                            <template if:true={showSpinner}>
+                                <lightning-spinner size="medium">
+                                </lightning-spinner>
+                            </template>  
+                            <div class="slds-p-top_large slds-text-align_right" >
+                                <lightning-button label={label.Cancel}  title={label.Cancel} onclick={createNewRecord}></lightning-button>
+                                <lightning-button variant="brand" label={label.Save}  class="slds-m-left_x-small" title={label.Save} onclick={insertNewRecord}></lightning-button>
+                            </div>  
+                        </div> 
+                    </div>   
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

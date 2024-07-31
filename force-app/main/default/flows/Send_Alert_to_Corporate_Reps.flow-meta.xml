@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Alert</name>
+        <label>Send Alert</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <actionName>OrderApi__Subscription__c.Corporate_Reps_Alert_when_Membership_is_awarded</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>OrderApi__Subscription__c.Corporate_Reps_Alert_when_Membership_is_awarded</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Alert_Expired_cancelled</name>
+        <label>Send Alert (Expired/cancelled)</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <actionName>OrderApi__Subscription__c.Corporate_Rep_Alert_when_is_expired_or_cancelled</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>OrderApi__Subscription__c.Corporate_Rep_Alert_when_is_expired_or_cancelled</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <decisions>
+        <name>Created_or_Updated</name>
+        <label>Created or Updated</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Created</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Alert</targetReference>
+            </connector>
+            <label>Created</label>
+        </rules>
+        <rules>
+            <name>Cancelled</name>
+            <conditionLogic>(1 OR 2 OR 3) AND 4</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Cancelled</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Expired</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Suspended</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Alert_Expired_cancelled</targetReference>
+            </connector>
+            <label>Cancelled</label>
+        </rules>
+    </decisions>
+    <description>updated the &quot;When to Run the Flow for Updated Records&quot; to
+Only when a record is updated to meet the condition requirements</description>
+    <environments>Default</environments>
+    <interviewLabel>Send Alert to Corporate Reps {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Send Alert to Corporate Reps</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Created_or_Updated</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Item_Display_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Corporate Contact</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Item_Display_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Corporate Rep</stringValue>
+            </value>
+        </filters>
+        <object>OrderApi__Subscription__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

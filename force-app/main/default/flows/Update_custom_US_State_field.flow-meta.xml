@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <decisions>
+        <description>If country = US</description>
+        <name>Country_US</name>
+        <label>Country = US</label>
+        <locationX>314</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.MailingCountryCode</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>US</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_custom_State_field</targetReference>
+            </connector>
+            <label>True</label>
+        </rules>
+        <rules>
+            <name>False</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.MailingCountry</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>United States</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MailingCountryCode</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>US</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Remove_value_in_Custom_State_field</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>False</label>
+        </rules>
+    </decisions>
+    <description>adding to update &quot;State&quot; picklist if MailingState is NOT NULL and State =NULL</description>
+    <environments>Default</environments>
+    <interviewLabel>Update custom State field {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update custom US State field</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Remove_value_in_Custom_State_field</name>
+        <label>Remove value in Custom State field</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>MailingCountryCode</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>US</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>State__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contact</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_custom_State_field</name>
+        <label>Update custom State field</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>State__c</field>
+            <value>
+                <elementReference>$Record.MailingState</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Country_US</targetReference>
+        </connector>
+        <filterFormula>OR(
+ISCHANGED({!$Record.MailingCountryCode}),
+ISCHANGED({!$Record.MailingStateCode}),
+AND(
+NOT(ISNULL({!$Record.MailingState})),
+ISPICKVAL({!$Record.State__c},&quot;&quot;),
+ISPICKVAL({!$Record.MailingCountryCode},&quot;US&quot;)
+)
+)</filterFormula>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

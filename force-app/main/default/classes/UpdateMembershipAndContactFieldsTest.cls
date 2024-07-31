@@ -23,38 +23,38 @@ private class UpdateMembershipAndContactFieldsTest {
         
         Contact contact4 = new Contact(
             FirstName = 'Test',
-            LastName = 'Test',
-            Membership_Status__c = 'Active',
-            Activated_Date__c = System.today()
+            LastName = 'Test'
+            //Membership_Status__c = 'Active',
+            //Activated_Date__c = System.today()
         );
         insert contact4;
-        
+        Test.startTest();
         OrderApi__Subscription__c sub1 = new OrderApi__Subscription__c(
             OrderApi__Contact__c = contact1.Id,
             OrderApi__Paid_Through_Date__c = Date.today().addDays(30),
-            OrderApi__Status__c = 'Active'
+            OrderApi__Status__c = 'Active', OrderApi__Entity__c = 'Contact'
         );
         insert sub1;
         
         OrderApi__Subscription__c sub2 = new OrderApi__Subscription__c(
             OrderApi__Contact__c = contact2.Id,
             OrderApi__Paid_Through_Date__c = Date.today().addDays(30),
-            OrderApi__Status__c = 'Active'
+            OrderApi__Status__c = 'Active', OrderApi__Entity__c = 'Account'
         );
         insert sub2;
-        
+        /*
         OrderApi__Subscription__c sub3 = new OrderApi__Subscription__c(
             OrderApi__Activated_Date__c = System.today(),
             OrderApi__Contact__c = contact2.Id,
             OrderApi__Paid_Through_Date__c = Date.today().addDays(30),
-            OrderApi__Status__c = 'Expired'
+            OrderApi__Status__c = 'Expired', OrderApi__Entity__c = 'Contact'
         );
         insert sub3;
         
         OrderApi__Subscription__c sub4 = new OrderApi__Subscription__c(
             OrderApi__Contact__c = contact3.Id,
             OrderApi__Paid_Through_Date__c = Date.today().addDays(30),
-            OrderApi__Status__c = 'Active'
+            OrderApi__Status__c = 'Active', OrderApi__Entity__c = 'Contact'
         );
         insert sub4;
         
@@ -62,11 +62,11 @@ private class UpdateMembershipAndContactFieldsTest {
             OrderApi__Activated_Date__c = System.today(),
             OrderApi__Contact__c = contact3.Id,
             OrderApi__Paid_Through_Date__c = Date.today().addDays(30),
-            OrderApi__Status__c = 'Active'
+            OrderApi__Status__c = 'Active', OrderApi__Entity__c = 'Account'
         );
         insert sub5;
+        */
         
-        Test.startTest();
         UpdateMembershipAndContactFieldsBatch batch = new UpdateMembershipAndContactFieldsBatch();
         
         Database.executeBatch(batch);

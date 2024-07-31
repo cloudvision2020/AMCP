@@ -1,0 +1,11 @@
+.slds-form-element__icon{
+	display: none !important;
+}
+
+div[part="help-text"]{
+	display: none !important;
+}
+.slds-form-element__icon {
+
+    display: none;
+}
