@@ -1,3 +1,0 @@
-<design:component label="CYRIL: Report Exporter">
-    <design:attribute name='title' />
-</design:component>

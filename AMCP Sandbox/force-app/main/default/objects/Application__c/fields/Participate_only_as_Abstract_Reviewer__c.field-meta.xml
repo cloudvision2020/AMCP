@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Participate_only_as_Abstract_Reviewer__c</fullName>
-    <defaultValue>false</defaultValue>
-    <externalId>false</externalId>
-    <label>Participate only as Abstract Reviewer</label>
-    <trackTrending>false</trackTrending>
-    <type>Checkbox</type>
-</CustomField>
