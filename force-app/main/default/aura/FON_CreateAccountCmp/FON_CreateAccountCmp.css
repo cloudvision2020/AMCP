@@ -1,0 +1,53 @@
+.THIS .background-white{
+    background-color: #FFF;       
+    padding : calc(16px + 0.6vw);
+}
+.THIS .center{
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 75rem;
+    margin-top: 0;
+}
+.THIS.background-off-white{
+    background: #f2f2f2 !important;
+}
+.THIS .infoMessage {
+    font-size: .875rem !important;
+    color: #666666 !important;
+}
+.THIS .pddng{
+    padding-right: 0.5em; padding-left: 1.5em; padding-bottom: 0.1em; padding-top: 0.1em
+}
+.THIS .slds-input{
+    border-color: gray;
+}
+.THIS .slds-select{
+    border-color: gray;
+}
+.THIS .highlight {
+    margin-left: 5px;
+    pointer-events: none;
+    color:#cc3333;
+}
+.THIS .with40{
+    width: 40%;
+}
+.THIS .slds-textarea{
+     border-color: gray;
+}
+.THIS .slds-card__header-title{
+    color : #fff;
+}
+
+.THIS .slds-card__header{
+    padding: 10px;
+}
+.THIS .nxtBtn:hover {
+    color : #fff;
+    background : Blue;
+}
+.THIS .slds-select{
+    height: 32px;
+    padding-top: 0 !important; 
+    padding-bottom: 0 !important;
+}

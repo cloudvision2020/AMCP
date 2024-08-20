@@ -10,7 +10,6 @@ global inherited sharing class EthosPermissionSetRoutingRule extends Framework.D
   }
 
   global override void afterInsert() {
-      System.debug('ESTOY ACAAA');
     try {
       List<User> users = (List<User>) records;
       Profile profile = [SELECT Id FROM Profile WHERE Name = 'Fonteva Customer Community Login'];

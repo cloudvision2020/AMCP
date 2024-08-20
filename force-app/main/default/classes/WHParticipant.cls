@@ -17,15 +17,15 @@ public class WHParticipant {
     public String feed_nid;
     public List<Object> flag_course_bookmark_flagged;
     public Integer flag_sid;
-    public List<WHRelationFacultyNodeReverse> relation_faculty_node_reverse;
+    //public List<WHRelationFacultyNodeReverse> relation_faculty_node_reverse;
     public String sms_user_phone_number;
     public String sms_user_status;
     public String sms_user_gateway;
     public String uuid;
     public WHProfileProfile profile_profile;
-    public WHProfileDisclosure profile_disclosure;
+    //public WHProfileDisclosure profile_disclosure;
 
-    /* public static WebhookParticipant parse(String json) {
-        return (WebhookParticipant) System.JSON.deserialize(json, WebhookParticipant.class);
-    }*/
+    public static WHParticipant parse(String json) {
+        return (WHParticipant) System.JSON.deserialize(json, WHParticipant.class);
+    }
 }

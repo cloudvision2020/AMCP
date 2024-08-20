@@ -583,6 +583,7 @@ export default class CreateAccount extends LightningElement {
             //if(this.accountRecordId!=undefined)
                 //this.newContact.AccountId =  this.accountRecordId;
             console.log('all fields are okay');
+            console.log('this.conPassword= '+this.conPassword);
             createAccount({con: this.newContact, username : this.conUsername, password : this.conPassword})
             .then(result => {
                 console.log('========this.newContact========='+result);
@@ -590,7 +591,7 @@ export default class CreateAccount extends LightningElement {
                 console.log('this.conPassword=========.  '+this.conPassword);
                 if(result=='success'){
                     //this.isAccountCreate = true;
-                    setTimeout(() => {
+                  setTimeout(() => {
                         login({username : this.conUsername, password : this.conPassword})
                         .then(result => {
                             console.log('========logged========='+result);
@@ -640,7 +641,7 @@ export default class CreateAccount extends LightningElement {
                         //var userCreationLabel = $A.get("$Label.c.UserCreated");
                         
 
-                    }, 3000);
+                    }, 5000);
                 }
                 else{
                     this.isAccountCreate = true;

@@ -1,0 +1,288 @@
+<aura:component controller="FON_CreateAccountController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    <ltng:require afterScriptsLoaded="{!c.initializeComponent}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="conObj" type="Contact" default="{ 'sobjectType': 'Contact'}"/>
+    <aura:attribute name="salutationPicklist" type="List" />
+    <aura:attribute name="suffixPicklist" type="List" />
+    <aura:attribute name="emailPicklist" type="List" />
+    <aura:attribute name="phonePicklist" type="List" />
+    <aura:attribute name="employerPicklist" type="List" />
+    <aura:attribute name="primaryPicklist" type="List" />
+    <aura:attribute name="jobRolePicklist" type="List" />
+    <aura:attribute name="addressPicklist" type="List" />
+    <aura:attribute name="openAccountSearch" type="Boolean" default="false" />
+    <aura:attribute name="account" type="Account" />
+   <!-- <aura:handler event="c:FON_AccountSelected" action="{!c.handleComponentEvent}"/> -->
+    <aura:attribute name="password" type="String" />
+    <aura:attribute name="confirmPassword" type="String" />
+    <aura:attribute name="errorMsg" type="String" default="" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="countries" type="List" default="[]" /> 
+    <aura:attribute name="statePicklistValues" type="List" default="[]" />
+    <aura:attribute name="country" type="String" default="United States" />
+    <aura:attribute name="state" type="String" default="" />
+    <aura:attribute name="objDetail" type="Account" default="{'sobjectType' : 'Account'}" />
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value" /> 
+    <aura:attribute name="disableState" type="Boolean" default="false" />
+    <aura:attribute name="selectedRecord" type="Object" default="" />
+    <aura:attribute name="message" type="String" default="" />
+    <aura:attribute name="searchString" type="string" default="" description="String to search"/>
+    <aura:attribute name="showCreateAccountScreen" type="boolean" default="false" />
+    <aura:attribute name="accountName" type="string" default="Company Not Provided" />
+    <aura:attribute name="username" type="string"  />
+    <div class="background-off-white">
+        <!-- Loading spinner container -->
+        
+        <div class="slds-grid slds-wrap center background-white">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12 pddng">
+                <p class="infoMessage">
+                {!$Label.c.Fon_Home}
+                </p>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12 pddng" style="margin-top: 20px;">
+                <p style="color:#FF0000; Font-size:12px">
+                    {!$Label.c.FON_designates_required_fields}
+                </p>
+            </div>
+            <aura:if isTrue="{!v.errorMsg != ''}">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" style="margin-bottom: 20px;border-radius: 2px; width: 100%;">
+                    <span class="slds-assistive-text">error</span>
+                    <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small">
+                    </span>
+                    <h2 style="margin:0;color:white"><aura:unescapedHtml value="{!v.errorMsg}" /></h2>
+                </div>
+            </aura:if>  
+            <!-- Personal Information -->
+            <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 pddng" style="background: #F2F2F2;margin-top: 20px;">
+                <p style="Font-Size:16px;background: #F2F2F2;"><b>{!$Label.c.FON_Personal_Information}</b></p>
+            </div>
+            <div class="slds-grid slds-wrap" style="margin-top: 10px;">
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng">
+                    <span>{!$Label.c.FON_First_Name}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:input aura:id="firstName" type="text" value="{!v.conObj.FirstName}" onblur="{!c.validateEvtHandler}"/>
+                    <span class="highlight" id="firstName_highlight"></span>
+                </div>  
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng">
+                    <span>{!$Label.c.FON_Last_Name}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:input aura:id="lastName" type="text" value="{!v.conObj.LastName}" onblur="{!c.validateEvtHandler}"/>
+                    <span class="highlight" id="lastName_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng">
+                    <span>{!$Label.c.Fon_Email_Type}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:select label="" value="{!v.conObj.OrderApi__Preferred_Email_Type__c}"  aura:id="emailType" class="selectClass" onblur="{!c.validateEvtHandler}">
+                        <aura:iteration items="{!v.emailPicklist}" var="ind">
+                            <option text="{!ind}" value="{!ind}" />
+                        </aura:iteration>
+                    </lightning:select>
+                    <span class="highlight" id="emailType_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" >
+                    <span>{!$Label.c.FON_Work_Email}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:input aura:id="email" type="text" value="{!v.conObj.Email}"   onchange="{!c.handleWorkEmailChange}" onblur="{!c.validateEvtHandler}"/>
+                    <span class="highlight" id="email_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 pddng">
+                    <p class="infoMessage">
+                        {!$Label.c.FON_header0}
+                    </p>
+                </div>
+                <div class="slds-col slds-size_5-of-12 slds-large-size_5-of-12 pddng" >
+                    <span>{!$Label.c.FON_Company}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:input aura:id="company" type="text" value="{!v.account.Name}" placeholder="  Company Not Provided" disabled="true"/>
+                    <span class="highlight" id="company_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_4-of-12 slds-large-size_4-of-12 pddng" style="margin-top: 52px;">
+                    <lightning:button class="btn-primary with40" variant="brand" label="{!$Label.c.FON_Search}" onclick="{!c.search}" />
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" >
+                    
+                </div>
+               
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: -6px;">
+                    <span>{!$Label.c.Fon_Phone_Type}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:select label="" value="{!v.conObj.OrderApi__Preferred_Phone_Type__c}" class="selectClass"  aura:id="PhoneType" onblur="{!c.validateEvtHandler}">
+                        <aura:iteration items="{!v.phonePicklist}" var="ind">
+                            <option text="{!ind}" value="{!ind}" />
+                        </aura:iteration>
+                    </lightning:select>
+                    <span class="highlight" id="PhoneType_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng">
+                    <span>{!$Label.c.FON_Phone_No}</span>
+                    <lightning:input aura:id="phoneNo" type="text" value="{!v.conObj.OrderApi__Work_Phone__c}" class="selectClass" onblur="{!c.validateEvtHandler}"/>
+                    <span class="highlight" id="phoneNo_highlight"></span>
+                </div>
+
+                <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12 pddng">
+                    
+                </div>
+
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                    <span>{!$Label.c.FON_Title}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:input aura:id="title1" type="text" value="{!v.conObj.Title}" class="selectClass"  onblur="{!c.validateEvtHandler}"/>
+                    <span class="highlight" id="title1_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                    <span>{!$Label.c.Fon_Employer_Type}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:select label="" value="{!v.conObj.Employer_Type__c}"  class="selectClass"  aura:id="EmployerType" onblur="{!c.validateEvtHandler}" >
+                        <aura:iteration items="{!v.employerPicklist}" var="ind">
+                            <option text="{!ind}" value="{!ind}" />
+                        </aura:iteration>
+                    </lightning:select>
+                    <span class="highlight" id="EmployerType_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                    <span>{!$Label.c.Fon_Primary_Position}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:select label="" value="{!v.conObj.Primary_Position__c}"  class="selectClass"  aura:id="PrimaryPosition" onblur="{!c.validateEvtHandler}">
+                        <aura:iteration items="{!v.primaryPicklist}" var="ind">
+                            <option text="{!ind}" value="{!ind}" />
+                        </aura:iteration>
+                    </lightning:select>
+                    <span class="highlight" id="PrimaryPosition_highlight"></span>
+                </div>
+                <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                    <span>{!$Label.c.Fon_Job_Role}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                    <lightning:select label="" value="{!v.conObj.Job_Role__c}"  class="selectClass"  aura:id="JobRole" onblur="{!c.validateEvtHandler}" onchange="{!c.optionClickHandler}">
+                        <aura:iteration items="{!v.jobRolePicklist}" var="ind">
+                            <option text="{!ind}" value="{!ind}" />
+                        </aura:iteration>
+                    </lightning:select>
+                    <span class="highlight" id="JobRole_highlight"></span>
+                </div>
+                
+            </div>
+           
+            <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 pddng" style="background: #F2F2F2;margin-top: 20px;">
+                <p style="Font-Size:16px;background: #F2F2F2;"><b>{!$Label.c.FON_Contact_Information}</b></p>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Address_Type}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:select label="" value="{!v.conObj.Address_Type__c}" class="selectClass"  aura:id="AddressType" onblur="{!c.validateEvtHandler}">
+                    <aura:iteration items="{!v.addressPicklist}" var="ind">
+                        <option text="{!ind}" value="{!ind}" />
+                    </aura:iteration>
+                </lightning:select>
+                <span class="highlight" id="AddressType_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_7-of-12 slds-large-size_7-of-12 pddng" style="margin-top: 10px;"></div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Street_Address}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:textarea  aura:id="street" type="text" value="{!v.conObj.MailingStreet}" class="selectClass" onblur="{!c.validateEvtHandler}"/>
+                <span class="highlight" id="street_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_7-of-12 slds-large-size_7-of-12 pddng" style="margin-top: 10px;"></div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_City}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:input aura:id="city" type="text" value="{!v.conObj.MailingCity}" class="selectClass" onblur="{!c.validateEvtHandler}"/>
+                <span class="highlight" id="city_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Country}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:select label="" value="{!v.country}" aura:id="country" class="selectClass" onblur="{!c.validateEvtHandler}" onchange="{!c.optionClickHandler}">
+                    <aura:iteration items="{!v.countries}" var="ind">
+                        <option text="{!ind}" value="{!ind}" />
+                    </aura:iteration>
+                </lightning:select>
+                <span class="highlight" id="country_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_State}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:select label="" value="{!v.state}"  aura:id="State1" class="selectClass" onblur="{!c.validateEvtHandler}">
+                    <aura:iteration items="{!v.statePicklistValues}" var="ind">
+                        <option text="{!ind}" value="{!ind}" />
+                    </aura:iteration>
+                </lightning:select>
+                <span class="highlight" id="State1_highlight"></span>
+            </div>
+            
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Zip_Code}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:input aura:id="PostalCode" type="text" value="{!v.conObj.MailingPostalCode}" class="selectClass" onblur="{!c.validateEvtHandler}"/>
+                <span class="highlight" id="PostalCode_highlight"></span>
+            </div>
+            
+            <!-- Web Account Information -->
+            <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 pddng" style="background: #F2F2F2;margin-top: 20px;">
+                <p style="Font-Size:16px;background: #F2F2F2;"><b>{!$Label.c.FON_Web_Account_Information}</b></p>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.Fon_Username}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:input aura:id="username" type="text" value="{!v.username}"  class="selectClass" onblur="{!c.validateEvtHandler}"/>
+                <span class="highlight" id="username_highlight"></span>
+            </div>
+           
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Password}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:input aura:id="password" type="password" value="{!v.password}" onblur="{!c.validateEvtHandler}" />
+                <span class="highlight" id="password_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" style="margin-top: 10px;">
+                <span>{!$Label.c.FON_Confirm_Password}</span><span style="color:#FF0000;Font-size:20px;"> * </span>
+                <lightning:input aura:id="confirmPassword" type="password" value="{!v.confirmPassword}" onblur="{!c.validateEvtHandler}" />
+                <span class="highlight" id="confirmPassword_highlight"></span>
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng" >
+                
+            </div>
+            <div class="slds-col slds-size_3-of-12 slds-large-size_3-of-12 pddng">
+                
+            </div>
+            <div class="slds-col slds-size_7-of-12 slds-large-size_7-of-12 pddng" >
+                <ui:outputText value="{!$Label.c.FON_PasswordHelpText}"/>	
+            </div>
+            
+            <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 pddng" style="margin-top: 20px;text-align:center">
+                <br/>
+                <lightning:button class="btn-primary" variant="brand" label="{!$Label.c.FON_Create_Account}" onclick="{!c.createAccount}" />
+                <br/>
+                <br/>
+            </div>
+            
+            <aura:if isTrue="{!v.openAccountSearch}">
+                <!--###### MODAL BOX Start######--> 
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container" style="max-width:100%;width: 90%;">
+                        <!-- ###### MODAL BOX HEADER Start ######-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close" class="slds-modal__close" size="large" variant="bare" alternativeText="Close" onclick="{! c.closeModal }"/>
+                        </header>
+                        <!--###### MODAL BOX BODY Part Start######-->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="height:100%">
+                            <div>
+                                <lightning:card title="Company Search" iconName="standard:search">
+                                    <aura:set attribute="actions">
+                                        <lightning:button class="nxtBtn" label="Next"
+                                                          onclick="{!c.nextClick}" />
+                                    </aura:set>
+                                    <p class="slds-p-horizontal_small">
+                                        {!$Label.c.FON_AccountSearchInstruction}
+                                        <br/>
+                                        <c:FON_AccountSearchCustomCmp searchString="{!v.searchString}"
+                                                                      message="{!v.message}"
+                                                                      selectedRecord="{!v.selectedRecord}"> 
+                                        </c:FON_AccountSearchCustomCmp>
+                                    </p>
+                                </lightning:card>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <!--###### MODAL BOX Part END Here ######-->
+            </aura:if>
+            
+
+            
+        </div>
+        <aura:if isTrue="{!v.showSpinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                    <span class="slds-assistive-text">Loading...</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:if>  
+    </div>
+</aura:component>

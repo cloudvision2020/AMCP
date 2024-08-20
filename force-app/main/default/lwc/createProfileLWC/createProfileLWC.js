@@ -4,7 +4,7 @@ import { LightningElement,track,api,wire } from 'lwc';
 export default class CreateProfileLWC extends LightningElement {
 
     strLinkLable = 'Create a profile';
-    strNavigateUrlValue = '/s/login/SelfRegister';
+    strNavigateUrlValue = '/s/amcp-login';
    // strReturnURLValue;
 
     connectedCallback(){

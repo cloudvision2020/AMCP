@@ -8,10 +8,21 @@
 
   <aura:registerEvent type="FDService:SparkPlugCompleteEvent" name="SparkPlugCompleteEvent"/>
   <aura:registerEvent type="FDService:SparkPlugLoadedEvent" name="SparkPlugLoadedEvent"/>
+    
   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-  <div>
-    <c:enrollment receiptName="{!v.receiptName}" onclose="{!c.handleFinish}" onmanual="{!c.handleFinish}"></c:enrollment>
-  </div>
-
+  	<div>
+    	<c:enrollment receiptName="{!v.receiptName}" onclose="{!c.handleFinish}" onmanual="{!c.handleFinish}"></c:enrollment>
+	</div>
+    <aura:html tag="style">
+        .FDServiceSparkPlugContainer.pfm-spark-plug-container{
+        	display: block !important;
+    	}
+        .slds-spinner_container.FDServiceSparkPlugContainer{
+            display: block !important;
+        }
+        #summary.slds-event--pane.LTEEventPaymentReceipt{
+            display: none;
+        }
+    </aura:html>
 </aura:component>

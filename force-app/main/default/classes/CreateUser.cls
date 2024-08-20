@@ -22,6 +22,11 @@ public without sharing class CreateUser{
         newUser.localesidkey = 'en_US';
         newUser.timezonesidkey =  'America/Los_Angeles';
         newUser.CommunityNickname = (EmailAddress + Math.random()).LEFT(40);    
+        newUser.isActive = True;
+        
+        //Site.validatePassword(newUser, password, password);  
+        
+        String userId = Site.createPortalUser(newUser, accountId , Password);
         
         
         //String networkId = Network.getNetworkId();
@@ -33,25 +38,19 @@ public without sharing class CreateUser{
         
         //String userId = Site.createPortalUser(newUser, accountId, password);
         
-        Framework.Dispatcher.disableTriggerInContext.put('User', true);
-        insert newUser;
+       // Framework.Dispatcher.disableTriggerInContext.put('User', true);
+        //insert newUser;
         
-        List<User> lstU = [Select Id from User where Id=:newUser.Id];
+        //system.debug('>>> '+ newUser.Id);
+        //system.debug('>>>password '+ password);
         
-        system.debug('>>> '+ newUser.Id);
-        system.debug('>>>password '+ password);
-        system.debug('>>>lstU '+ lstU);
-        if(lstU.size() > 0){
-            System.setPassword(lstU[0].id, password);
-        }
-        
-        
+        //System.setPassword(newUser.id, password);
         //List<User> users = new List<User>(); 
         //users.add(newUser);
         //Database.DMLOptions dlo = new Database.DMLOptions();
         //dlo.EmailHeader.triggerUserEmail = false;
         //database.insert(users, dlo);
-        Framework.Dispatcher.disableTriggerInContext.put('User', false);
+        //Framework.Dispatcher.disableTriggerInContext.put('User', false);
           
    }
    

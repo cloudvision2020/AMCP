@@ -86,7 +86,25 @@ global without sharing class CreateAccountController {
             insert con;
             Framework.Dispatcher.disableTriggerInContext.put('Contact', false);
             
-            CreateUser.createUser(con.id, con.firstname, con.lastname, con.email, username, password, con.AccountId);
+            //createUser.createUser(con.id, con.firstname, con.lastname, con.email, username, password, con.AccountId);
+            
+            User usr = FON_CreateAccountController.createUser(Label.FON_Registration_Profile,
+                                      con.email, 
+                                      con.LastName, 
+                                      con.FirstName, con.Id);
+                                      
+            if(!Test.isRunningTest()){
+                Site.validatePassword(usr, password, password);  
+            }
+            String userId = Site.createPortalUser(usr, con.AccountId , Password);
+            
+            //String startUrl = System.Label.FON_ProfileUrl;
+            
+            //ApexPages.PageReference login = Site.login(con.email, password,startUrl);
+            //Aura.redirect(login);
+            //system.debug('jmd login.getUrl()--'+login.getUrl());
+            
+            //return login.getUrl();
             return 'success';
         }
         catch(Exception e){
@@ -253,10 +271,10 @@ global without sharing class CreateAccountController {
     public static String login(String username, String password) {
         String result = null;
         try {
-           
             system.debug('username = '+ username );
             system.debug('password = '+ password );
-            ApexPages.PageReference pageRef = Site.login(username, password, '');
+            String siteURL  = Label.Site_URL;
+            ApexPages.PageReference pageRef = Site.login(username, password, siteURL);
             result = pageRef.getUrl();
         } catch (Exception ex) {
             result = ex.getMessage();

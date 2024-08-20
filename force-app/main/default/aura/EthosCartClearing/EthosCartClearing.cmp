@@ -13,5 +13,15 @@
   <div>
     <c:cartClearing receiptName="{!v.receiptName}" onclose="{!c.handleFinish}" onmanual="{!c.handleFinish}"></c:cartClearing>
   </div>
-
+    <aura:html tag="style">
+        .FDServiceSparkPlugContainer.pfm-spark-plug-container{
+        	display: block !important;
+    	}
+        .slds-spinner_container.FDServiceSparkPlugContainer{
+            display: block !important;
+        }
+        #summary.slds-event--pane.LTEEventPaymentReceipt{
+            display: none;
+        }
+    </aura:html>
 </aura:component>

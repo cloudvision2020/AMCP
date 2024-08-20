@@ -12,7 +12,6 @@ public class WHCourseEnrollment {
     public String enroll_end;
     public String code;
     public String user_type;
-    public EnrollmentType type;
     public WHParticipant uid;
     public String data;
     public String updated;
