@@ -4,14 +4,14 @@ public class WHCourseWrapper {
     public Boolean field_course_catalog;
     public Boolean field_course_live;
     public Boolean field_course_transcript;
-    public Object field_requirements_max;
-    public Object field_requirements_min;
-    public Object field_show_child_catalog;
-    public Object field_show_child_transcript;
-    public Object field_enrollment_requirement_min;
+    //public Object field_requirements_max;
+    //public Object field_requirements_min;
+    //public Object field_show_child_catalog;
+    //public Object field_show_child_transcript;
+    //public Object field_enrollment_requirement_min;
     public Boolean field_show_on_calendar;
-    public Object field_job_code;
-    public Object field_primary_speciality;
+    //public Object field_job_code;
+    //public Object field_primary_speciality;
     public String model;
     public String list_price;
     public String cost;
@@ -75,10 +75,10 @@ public class WHCourseWrapper {
         public String country;
         public String province_name;
         public String country_name;
-        public Object phone;
-        public Object fax;
-        public Object email;
-        public Object www;
+        public String phone;
+        public String fax;
+        public String email;
+        public String www;
     }
 
     public class FieldCourseSummary {

@@ -15,7 +15,7 @@ public class WHParticipant {
     public String feeds_item_guid;
     public String feeds_item_url;
     public String feed_nid;
-    public List<Object> flag_course_bookmark_flagged;
+    //public List<Object> flag_course_bookmark_flagged;
     public Integer flag_sid;
     //public List<WHRelationFacultyNodeReverse> relation_faculty_node_reverse;
     public String sms_user_phone_number;

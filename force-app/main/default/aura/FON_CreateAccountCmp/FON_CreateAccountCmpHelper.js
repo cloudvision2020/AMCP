@@ -133,11 +133,11 @@
         oContact.First_Name__c = component.get("v.conObj.FirstName");
         oContact.Last_Name__c = component.get("v.conObj.LastName");
         oContact.OrderApi__Preferred_Email_Type__c = component.get("v.conObj.OrderApi__Preferred_Email_Type__c");
-        oContact.OrderApi__Work_Email__c = component.get("v.conObj.Email");
+        oContact.Email = component.get("v.conObj.Email");
         oContact.OrderApi__Preferred_Phone_Type__c = component.get("v.conObj.OrderApi__Preferred_Phone_Type__c");
         oContact.OrderApi__Work_Phone__c = component.get("v.conObj.OrderApi__Work_Phone__c");
         oContact.Title = component.get("v.conObj.Title");
-        oContact.Employer_Type__c = component.get("v.conObj.conObj.Employer_Type__c");
+        oContact.Employer_Type__c = component.get("v.conObj.Employer_Type__c");
         oContact.Primary_Position__c = component.get("v.conObj.Primary_Position__c");
         oContact.Job_Role__c = component.get("v.conObj.Job_Role__c");
         oContact.Address_Type__c =  component.get("v.conObj.Address_Type__c");
@@ -153,13 +153,13 @@
         debugger;
         if (oContact.OrderApi__Preferred_Email_Type__c != null) {
             if (oContact.OrderApi__Preferred_Email_Type__c == 'Personal') {
-                oContact.OrderApi__Personal_Email__c = oContact.email;
+                oContact.OrderApi__Personal_Email__c = oContact.Email;
             } else if (oContact.OrderApi__Preferred_Email_Type__c == 'Work') {
-                oContact.OrderApi__Work_Email__c = oContact.email ;
+                oContact.OrderApi__Work_Email__c = oContact.Email ;
             } else if (oContact.OrderApi__Preferred_Email_Type__c == 'Other') {
-                oContact.OrderApi__Other_Email__c = oContact.email;
+                oContact.OrderApi__Other_Email__c = oContact.Email;
             } else if (oContact.OrderApi__Preferred_Email_Type__c == 'Assistant'){
-                oContact.OrderApi__Assistant_Email__c = oContact.email;
+                oContact.OrderApi__Assistant_Email__c = oContact.Email;
             }
          }
 

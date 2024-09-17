@@ -4,7 +4,7 @@ public class WHProfileProfile {
     public String field_last_name;
     public String field_middle_name;
     public String field_name_prefix;
-    public List<Object> field_profile_location;
+    //public List<Object> field_profile_location;
     public String field_primary_speciality;
     public List<FieldAccmeIds> field_accme_ids;
     public String field_preferred_pronouns;

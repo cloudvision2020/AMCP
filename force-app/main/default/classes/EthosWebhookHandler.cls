@@ -33,10 +33,9 @@ global without sharing class EthosWebhookHandler {
         try {
             if(price == '0.00000' || price == '0.0000' || price == '0.000' || price == '0.00' || price == '0') {
                 
-                contact = [SELECT Id, AccountId FROM Contact WHERE FirstName =: contactFirstName AND LastName =: contactLastName AND Email =: contactEmail LIMIT 1];
+                contact = [SELECT Id, AccountId, Name FROM Contact WHERE FirstName =: contactFirstName AND LastName =: contactLastName AND Email =: contactEmail LIMIT 1];
                 
                 if(contact != new Contact()) {
-                    
                     
                     try {
                         ev = [SELECT Id FROM EventApi__Event__c WHERE EventApi__Display_Name__c =: event LIMIT 1];
@@ -59,6 +58,7 @@ global without sharing class EthosWebhookHandler {
                         salesOrder.OrderApi__Contact__c = contact.Id;
                         salesOrder.OrderApi__Date__c = Date.today();
                         salesOrder.OrderApi__Entity__c = 'Contact';
+                        salesOrder.OrderApi__Posting_Entity__c = 'Invoice';
                         insert salesOrder;
                         
                         OrderApi__Sales_Order_Line__c sol = new OrderApi__Sales_Order_Line__c();
@@ -78,6 +78,17 @@ global without sharing class EthosWebhookHandler {
                         
                         salesOrder.OrderApi__Is_Posted__c = true;
                         update salesOrder;
+                        
+                        if(ev != null){
+                            EventApi__Attendee__c att = new EventApi__Attendee__c();
+                            att.EventApi__Contact__c = contact.Id;
+                            att.EventApi__Attendee_Event__c = ev.Id;
+                            att.EventApi__Full_Name__c = contact.Name;
+                            att.EventApi__Status__c = 'Registered';
+                            att.EventApi__Sales_Order__c = salesOrder.Id;
+                            att.EventApi__Sales_Order_Line__c = sol.Id;
+                            insert att;
+                        }
                         
                     }
                 }
